@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none}
 .search-advanced a:hover{color:#b0c4cc}
 
 /* ---- Grid Heading ---- */
-.grid-heading{background:#111;color:#aaa;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 28px;border-bottom:1px solid #1a1a1a}
+.grid-heading{background:#111;color:#aaa;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 28px 6px;border-bottom:1px solid #1a1a1a}
 
 /* ---- Photo Grid ---- */
 .grid-wrap{padding-top:110px}
