@@ -9,6 +9,15 @@
   var PS_SITE = 'https://actionplusps.photoshelter.com';
   var MAX_GALLERIES = 60;
 
+  // ---- Fix header padding on all pages ----
+  function fixHeaderPadding() {
+    var hdr = document.querySelector('.site-header');
+    var wrap = document.getElementById('gridWrap') || document.querySelector('.page-content');
+    if (hdr && wrap) {
+      wrap.style.paddingTop = hdr.offsetHeight + 'px';
+    }
+  }
+
   // ---- Grid aspect ratio logic (from original v4) ----
   function calcAspect(cellW) {
     var WIDE = 450, NARROW = 270;
@@ -96,11 +105,7 @@
       grid.appendChild(cell);
     }
 
-    // Adjust padding to clear the fixed header
-    var hh = document.querySelector('.site-header');
-    if (hh) {
-      document.getElementById('gridWrap').style.paddingTop = hh.offsetHeight + 'px';
-    }
+    fixHeaderPadding();
   }
 
   // ---- Parse date and title from gallery name ----
@@ -212,11 +217,7 @@
     init();
   }
 
-  // ---- Fix header padding on all pages ----
-  var hdr = document.querySelector('.site-header');
-  var wrap = document.getElementById('gridWrap') || document.querySelector('.page-placeholder');
-  if (hdr && wrap) {
-    wrap.style.paddingTop = hdr.offsetHeight + 'px';
-  }
+  fixHeaderPadding();
+  window.addEventListener('load', fixHeaderPadding);
 
 })();
