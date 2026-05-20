@@ -1,0 +1,4 @@
+# APSI Gallery Sync — run every hour to pull latest thumbnails from PhotoShelter
+# To install: crontab -e, then paste the line below (adjust the path if needed)
+
+23 * * * * cd /Users/bobkupbens/Desktop/Projects/apsi && /usr/bin/python3 serve.py --sync >> /tmp/apsi-sync.log 2>&1
