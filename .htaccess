@@ -1,0 +1,24 @@
+# Custom 404 page
+ErrorDocument 404 /404.html
+
+# Cache-control for APSI site
+
+# galleries.json — never cache (always check for updates)
+<FilesMatch "galleries\.json">
+  Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+
+# WebP images — cache for 10 minutes, then revalidate
+<FilesMatch "\.webp$">
+  Header set Cache-Control "public, max-age=600, must-revalidate"
+</FilesMatch>
+
+# CSS/JS — cache for 1 hour
+<FilesMatch "\.(css|js)$">
+  Header set Cache-Control "public, max-age=3600"
+</FilesMatch>
+
+# HTML — no cache
+<FilesMatch "\.html$">
+  Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>

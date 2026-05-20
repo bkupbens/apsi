@@ -1,0 +1,5 @@
+api/config.php
+images/
+galleries.json
+etags.json
+.DS_Store

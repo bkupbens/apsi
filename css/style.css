@@ -1,0 +1,106 @@
+/* =============================================================
+   Action Plus Sports Images — Global Styles
+   ============================================================= */
+
+/* ---- Self-hosted fonts (GDPR compliant) ---- */
+@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/BebasNeue-Regular.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/DMSans-Variable.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/DMSans-Variable.woff2') format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/DMSans-Variable.woff2') format('woff2')}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100vh;background:#0a0a0a;color:#f0ede8;font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}
+
+/* ---- Header / Nav ---- */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100}
+
+.nav-black{background:#000;padding:12px 28px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid #1a1a1a}
+.nav-logo{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.nav-logo img{height:84px;width:auto;display:block;flex-shrink:0;object-fit:contain}
+.nav-tagline{font-size:17px;letter-spacing:.06em;color:#888;font-style:italic}
+.nav-right{display:flex;align-items:center;gap:4px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#aaa;padding:6px 12px;border-radius:3px;white-space:nowrap;transition:color .15s,background .15s}
+.nav-links a:hover{color:#fff;background:#1a1a1a}
+.nav-links a.active{color:#b0c4cc}
+.nav-login-btn{display:inline-block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#000;background:#b0c4cc;padding:8px 18px;border-radius:4px;white-space:nowrap;transition:background .15s;font-weight:500}
+.nav-login-btn:hover{background:#c4d8e0}
+.nav-login-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav-register{font-size:10px;letter-spacing:.05em;color:#666;transition:color .15s}
+.nav-register:hover{color:#aaa}
+
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:#aaa}
+
+/* ---- Search Strip ---- */
+.search-strip{background:rgba(30,30,30,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:28px 28px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.search-inner{max-width:720px;margin:0 auto;display:flex;align-items:center}
+.search-input{flex:1;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);border-radius:6px 0 0 6px;padding:0 18px;height:48px;font-size:15px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;letter-spacing:.02em}
+.search-input::placeholder{color:rgba(255,255,255,.4)}
+.search-input:focus{border-color:rgba(176,196,204,.7);background:rgba(255,255,255,.13)}
+.search-btn{background:#b0c4cc;border:none;border-radius:0 6px 6px 0;height:48px;padding:0 20px;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#000;font-weight:500;white-space:nowrap;transition:background .15s}
+.search-btn:hover{background:#c4d8e0}
+.search-btn svg{width:15px;height:15px;stroke:#000;stroke-width:2.5;fill:none;flex-shrink:0}
+.search-advanced{max-width:720px;margin:4px auto 0;text-align:left}
+.search-advanced a{font-size:11px;color:#666;letter-spacing:.05em;transition:color .15s}
+.search-advanced a:hover{color:#b0c4cc}
+
+/* ---- Grid Heading ---- */
+.grid-heading{background:#111;color:#aaa;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 28px;border-bottom:1px solid #1a1a1a}
+
+/* ---- Photo Grid ---- */
+.grid-wrap{padding-top:110px}
+.photo-grid{display:grid;width:100%;gap:12px;background:#000}
+.photo-cell{position:relative;overflow:hidden;background:#111;cursor:pointer}
+.photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .3s;filter:brightness(.88)}
+.photo-cell:hover img{transform:scale(1.06);filter:brightness(1.05)}
+
+/* ---- Image count badge (top-right) ---- */
+.cell-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:500;letter-spacing:.03em;padding:5px 10px;border-radius:4px;display:flex;align-items:center;gap:5px;pointer-events:none;z-index:2}
+.cell-badge svg{opacity:.85}
+
+/* ---- Always-visible label (bottom) ---- */
+.cell-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.4) 70%,transparent 100%);padding:24px 14px 12px;pointer-events:none;transition:opacity .25s;z-index:1}
+.cell-label-date{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.04em;margin-bottom:3px}
+.cell-label-title{font-size:15px;color:#f0ede8;letter-spacing:.02em;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.photo-cell:hover .cell-label{opacity:0}
+
+/* ---- Hover overlay ---- */
+.hover-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 50%,transparent 70%);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;z-index:1}
+.photo-cell:hover .hover-info{opacity:1}
+.hover-date{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.04em;margin-bottom:3px}
+.hover-event{font-size:15px;color:#f0ede8;letter-spacing:.02em;font-weight:500;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+
+/* ---- Loading / Status ---- */
+.grid-loading{display:flex;align-items:center;justify-content:center;min-height:60vh;color:#555;font-size:14px;letter-spacing:.05em}
+.grid-error{display:flex;align-items:center;justify-content:center;min-height:60vh;color:#b0c4cc;font-size:14px;letter-spacing:.05em;text-align:center;padding:20px}
+
+/* ---- See All Link ---- */
+.see-all-wrap{text-align:center;padding:32px 20px 36px;background:#0a0a0a}
+.see-all-link{display:inline-block;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#b0c4cc;border:1.5px solid #b0c4cc;padding:12px 32px;border-radius:5px;transition:background .2s,color .2s}
+.see-all-link:hover{background:#b0c4cc;color:#000}
+
+/* ---- Footer ---- */
+.site-footer{background:#000;border-top:1px solid #1a1a1a;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:#888}
+.footer-logo span{color:#999}
+.footer-links{display:flex;gap:20px;font-size:11px;color:#888;letter-spacing:.06em;flex-wrap:wrap}
+.footer-links a:hover{color:#b0c4cc}
+.footer-copy{font-size:11px;color:#777;letter-spacing:.04em}
+
+/* ---- Placeholder Page Content ---- */
+.page-placeholder{display:flex;align-items:center;justify-content:center;min-height:70vh;color:#444;font-size:18px;letter-spacing:.06em;font-family:'Bebas Neue',sans-serif;text-transform:uppercase}
+
+/* ---- Responsive ---- */
+@media(max-width:700px){
+  .nav-right{display:none;position:absolute;top:100%;left:0;right:0;background:#000;flex-direction:column;padding:12px 20px;gap:8px;border-bottom:1px solid #1a1a1a;z-index:99}
+  .nav-right.open{display:flex}
+  .nav-links{flex-direction:column;gap:0}
+  .nav-links a{padding:10px 4px;border-bottom:1px solid #111}
+  .nav-login-wrap{flex-direction:row;gap:12px;padding:10px 4px}
+  .nav-hamburger{display:flex}
+  .search-strip{padding:10px 16px}
+  .search-input{font-size:14px;padding:11px 14px}
+  .site-footer{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 20px}
+}
