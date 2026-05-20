@@ -47,10 +47,10 @@ a{color:inherit;text-decoration:none}
 .search-advanced a:hover{color:#b0c4cc}
 
 /* ---- Grid Heading ---- */
-.grid-heading{background:#111;color:#aaa;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:7px 28px 7px;border-bottom:1px solid #1a1a1a}
+.grid-heading{background:#111;color:#aaa;font-size:12px;line-height:1;letter-spacing:.12em;text-transform:uppercase;padding:10px 28px;border-bottom:1px solid #1a1a1a}
 
 /* ---- Photo Grid ---- */
-.grid-wrap{padding-top:110px}
+.grid-wrap{padding-top:0}
 .photo-grid{display:grid;width:100%;gap:12px;background:#000}
 .photo-cell{position:relative;overflow:hidden;background:#111;cursor:pointer}
 .photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .3s;filter:brightness(.88)}
