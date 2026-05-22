@@ -90,7 +90,7 @@ a{color:inherit;text-decoration:none}
 .footer-copy{font-size:11px;color:#777;letter-spacing:.04em}
 
 /* ---- Page Content ---- */
-.page-content{max-width:800px;margin:0 auto;padding:140px 28px 60px;line-height:1.7}
+.page-content{max-width:1100px;margin:0 auto;padding:140px 48px 60px;line-height:1.7}
 .page-content h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:#b0c4cc;margin-bottom:24px}
 .page-content h2{font-size:18px;font-weight:500;color:#b0c4cc;margin:32px 0 12px;letter-spacing:.03em}
 .page-content p{font-size:15px;color:#ccc;margin-bottom:16px}
@@ -118,4 +118,10 @@ a{color:inherit;text-decoration:none}
   .search-strip{padding:10px 16px}
   .search-input{font-size:14px;padding:11px 14px}
   .site-footer{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 20px}
+  .page-content{padding:120px 18px 40px}
+  .page-content h1{font-size:26px}
+  .page-content h2{font-size:16px}
+  .page-content p{font-size:14px}
+  .page-content .contact-grid{grid-template-columns:1fr}
+  .page-content .contact-card[style*="grid-column"]{grid-column:auto}
 }
