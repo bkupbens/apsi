@@ -2,16 +2,25 @@
 
 ## Overview
 
-Static website for Action Plus Sports Images (actionplus.co.uk) that displays a responsive gallery grid of recent sporting event photography. Gallery thumbnails and metadata are synced from PhotoShelter via a Python script on a scheduled basis.
+Static website for Action Plus Sports Images (actionplus.co.uk) that displays a responsive gallery grid of recent sporting event photography. Gallery thumbnails and metadata are synced from PhotoShelter via a scheduled script.
 
 **GitHub repo:** https://github.com/bkupbens/apsi
 
 ## Technology Stack
 
 - **Frontend:** Static HTML, CSS, vanilla JavaScript (no frameworks, no build step)
-- **Sync script:** Python 3.10+ with Pillow (PIL) for image processing
+- **Sync scripts:** Two options available (see below)
 - **Image source:** PhotoShelter (actionplusps.photoshelter.com)
 - **No database required**
+
+### Sync Script Options
+
+| Script | Requirements | Best for |
+|--------|-------------|----------|
+| `sync.sh` (Bash) | bash 3+, curl, awk, sed, ImageMagick 6.7+ | Production hosting, servers without Python 3 |
+| `serve.py --sync` (Python) | Python 3.10+, Pillow | Local development, hosts with Python 3 |
+
+Both scripts produce identical output — the same `galleries.json` and WebP thumbnail images.
 
 ## File Structure
 
@@ -33,7 +42,8 @@ apsi/
 │   └── logo.png            # Site logo
 ├── galleries.json          # Gallery manifest (names, URLs, image paths, counts)
 ├── etags.json              # ETag cache for change detection (auto-generated)
-├── serve.py                # Local dev server + PhotoShelter sync script
+├── sync.sh                 # Bash sync script (recommended for production)
+├── serve.py                # Python sync script + local dev server
 ├── crontab.example         # Example cron schedule for automated sync
 ├── .htaccess               # Apache rewrite rules (if using Apache)
 ├── .gitignore
@@ -48,7 +58,7 @@ apsi/
 
 1. **Static site** — All HTML pages are plain static files. No server-side rendering required.
 2. **Gallery grid** — `index.html` loads `galleries.json` via JavaScript fetch and renders a responsive photo grid. Each cell links to the corresponding PhotoShelter gallery page.
-3. **Sync script** — `serve.py --sync` scrapes the PhotoShelter gallery-list page, downloads cover images as WebP thumbnails (1200px wide, quality 84), and writes `galleries.json`. It uses ETags to detect changed covers and cleans up removed galleries.
+3. **Sync script** — Scrapes the PhotoShelter gallery-list page, downloads cover images, converts them to WebP thumbnails (1200px wide, quality 84), and writes `galleries.json`. Uses ETags to detect changed covers and cleans up removed galleries.
 4. **Image count** — The sync also scrapes the number of images per gallery from PhotoShelter and includes it in `galleries.json`, displayed as a badge on each grid cell.
 
 ## Hosting Requirements
@@ -58,12 +68,19 @@ apsi/
 - No server-side language needed
 - Gallery images won't auto-update without the sync script
 
-### Production (Auto-Updating)
+### Production (Auto-Updating with Bash)
 - Static file hosting for the site
-- Python 3.10+ environment to run the sync script
-- **Python dependency:** Pillow (`pip install Pillow`)
-- Cron job or scheduled task to run the sync periodically
-- Write access to the `images/` directory and `galleries.json`
+- **bash 3+** (standard on virtually all Linux/Unix servers)
+- **curl** (for HTTP requests)
+- **ImageMagick 6.7+** (for JPEG to WebP conversion via `convert`)
+- Cron job to run the sync periodically
+- Write access to the `images/` directory, `galleries.json`, and `etags.json`
+
+### Alternative: Production with Python
+- Python 3.10+
+- **Pillow** (`pip install Pillow`)
+- Cron job to run the sync periodically
+- Write access to the `images/` directory, `galleries.json`, and `etags.json`
 
 ## Setup Instructions
 
@@ -73,29 +90,43 @@ git clone https://github.com/bkupbens/apsi.git
 cd apsi
 ```
 
-### 2. Install Python dependency
+### 2. Run initial sync
+
+**Using Bash (recommended for production):**
 ```bash
-pip install Pillow
+bash sync.sh
 ```
 
-### 3. Run initial sync
+**Using Python (alternative):**
 ```bash
+pip install Pillow
 python3 serve.py --sync
 ```
-This will:
+
+Both will:
 - Fetch the gallery list from PhotoShelter
 - Download ~100 cover images as WebP to `images/`
 - Generate `galleries.json` with gallery metadata and image counts
 - Generate `etags.json` for change tracking
 
-### 4. Configure scheduled sync
+### 3. Configure scheduled sync
+
 Add a cron job to run the sync periodically (e.g., every hour):
+
+**Bash version:**
+```
+23 * * * * cd /path/to/apsi && bash sync.sh >> /tmp/apsi-sync.log 2>&1
+```
+
+**Python version:**
 ```
 23 * * * * cd /path/to/apsi && python3 serve.py --sync >> /tmp/apsi-sync.log 2>&1
 ```
+
 See `crontab.example` for reference.
 
-### 5. Serve the site
+### 4. Serve the site
+
 Point your web server document root to the `apsi/` directory. No special server-side configuration is needed beyond serving static files.
 
 For local development:
@@ -110,9 +141,9 @@ python3 serve.py
 |---------|----------|-------|
 | Max galleries displayed | `js/app.js` line 10 | `MAX_GALLERIES = 60` |
 | Grid column width | `js/app.js` line 56 | `Math.floor(W / 360)` |
-| Image quality | `serve.py` line 139 | `quality=84` (WebP) |
-| Image width | `serve.py` line 133 | `1200px` (from PhotoShelter) |
-| PhotoShelter URL | `serve.py` line 22 | `actionplusps.photoshelter.com` |
+| Image quality | `sync.sh` / `serve.py` | `quality 84` (WebP) |
+| Image width | `sync.sh` / `serve.py` | `1200px` (from PhotoShelter) |
+| PhotoShelter URL | `sync.sh` / `serve.py` | `actionplusps.photoshelter.com` |
 
 ## Apache Configuration
 
@@ -124,5 +155,5 @@ If using Apache, the included `.htaccess` file handles:
 
 - All fonts are self-hosted in `css/fonts/` (GDPR compliant — no external font requests).
 - The site makes no tracking cookies or analytics calls.
-- The `images/` directory currently is tracked in git to support the GitHub Pages demo. For production, you may want to add it back to `.gitignore` and generate images on the server via the sync script.
+- The `images/` directory is currently tracked in git to support the GitHub Pages demo. For production, you may want to add it back to `.gitignore` and generate images on the server via the sync script.
 - The `WORDPRESS-PLUGIN-SPEC.md` file is a reference document from an earlier project phase and is not part of the live site.
