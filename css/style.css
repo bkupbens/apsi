@@ -105,6 +105,23 @@ a{color:inherit;text-decoration:none}
 .page-content .contact-card h3{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#b0c4cc;margin-bottom:10px}
 .page-content .contact-card p{font-size:14px;color:#aaa;margin-bottom:6px}
 .page-content .highlight-box{background:#111;border-left:3px solid #b0c4cc;padding:16px 20px;margin:20px 0;border-radius:0 6px 6px 0}
+.page-photo{float:right;margin:4px 0 20px 28px;padding:0;max-width:420px}
+.page-photo img{width:100%;border-radius:6px;display:block}
+.page-photo figcaption{font-size:11px;color:#777;margin-top:6px;letter-spacing:.03em;font-style:italic}
+.page-photo-wide{margin:0 0 28px;padding:0;max-width:600px}
+.page-photo-wide img{width:100%;border-radius:6px;display:block}
+.page-photo-wide figcaption{font-size:11px;color:#777;margin-top:6px;letter-spacing:.03em;font-style:italic}
+.contact-top{display:flex;gap:24px;margin-bottom:24px;align-items:flex-start}
+.contact-top-cards{display:flex;flex-direction:column;gap:16px;flex:1}
+.contact-top-cards .contact-card{background:#111;border:1px solid #1a1a1a;border-radius:6px;padding:20px}
+.contact-top-cards .contact-card h3{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#b0c4cc;margin-bottom:10px}
+.contact-top-cards .contact-card p{font-size:14px;color:#aaa;margin-bottom:6px}
+.contact-top-photo{flex:0 0 auto;max-width:520px}
+.contact-top-photo img{width:100%;border-radius:6px;display:block}
+.contact-top-photo figcaption{font-size:11px;color:#777;margin-top:6px;letter-spacing:.03em;font-style:italic}
+.contact-grid-3{grid-template-columns:repeat(3,1fr)}
+.page-photo-left{float:left;margin:4px 28px 20px 0}
+@media(max-width:700px){.page-photo,.page-photo-left{float:none;max-width:100%;margin:20px 0}}
 .page-content .highlight-box p{margin-bottom:0}
 
 /* ---- Responsive ---- */
@@ -122,6 +139,8 @@ a{color:inherit;text-decoration:none}
   .page-content h1{font-size:26px}
   .page-content h2{font-size:16px}
   .page-content p{font-size:14px}
-  .page-content .contact-grid{grid-template-columns:1fr}
+  .contact-top{flex-direction:column}
+  .contact-top-photo{max-width:100%}
+  .page-content .contact-grid,.contact-grid-3{grid-template-columns:1fr}
   .page-content .contact-card[style*="grid-column"]{grid-column:auto}
 }
