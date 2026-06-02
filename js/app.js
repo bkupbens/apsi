@@ -110,7 +110,7 @@
 
   // ---- Parse date and title from gallery name ----
   // Names like "2026 Premier League Football Chelsea v Tottenham May 19th"
-  var MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
+  var MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
   var DATE_RE = new RegExp('^(\\d{4})\\s+(.+?)\\s+(' + MONTHS + ')\\s+(\\d{1,2})(?:st|nd|rd|th)?\\s*$', 'i');
 
   function parseGalleryInfo(name) {
